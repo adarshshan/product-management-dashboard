@@ -50,3 +50,11 @@
     transform: rotate(360deg);
   }
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 2px !important;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}

@@ -13,6 +13,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 import Modal from "../components/Modal";
 import ProductForm from "../components/ProductForm";
+import ProductPreview from "../components/ProductPreview";
 
 const Dashboard: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,8 +22,12 @@ const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [categories, setCategories] = useState<string[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState<boolean>(false);
+  const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -54,7 +59,7 @@ const Dashboard: React.FC = () => {
     try {
       const newProduct = await addProduct(product);
       setProducts([newProduct, ...products]);
-      setIsModalOpen(false);
+      setIsFormModalOpen(false);
     } catch (err: any) {
       setError(err.message);
     }
@@ -64,7 +69,7 @@ const Dashboard: React.FC = () => {
     try {
       const updated = await updateProduct(product.id, product);
       setProducts(products.map((p) => (p.id === product.id ? updated : p)));
-      setIsModalOpen(false);
+      setIsFormModalOpen(false);
       setEditingProduct(null);
     } catch (err: any) {
       setError(err.message);
@@ -82,7 +87,13 @@ const Dashboard: React.FC = () => {
 
   const handleEdit = (product: Product) => {
     setEditingProduct(product);
-    setIsModalOpen(true);
+    setIsFormModalOpen(true);
+  };
+
+  const handlePreview = (product: Product) => {
+    console.log("Previewing product:", product)
+    setPreviewProduct(product);
+    setIsPreviewModalOpen(true);
   };
 
   const handleSave = (productData: Product | Omit<Product, "id">) => {
@@ -130,7 +141,7 @@ const Dashboard: React.FC = () => {
         <button
           onClick={() => {
             setEditingProduct(null);
-            setIsModalOpen(true);
+            setIsFormModalOpen(true);
           }}
           className="bg-green-500 text-white px-4 py-2 rounded"
         >
@@ -148,17 +159,24 @@ const Dashboard: React.FC = () => {
             product={product}
             onEdit={handleEdit}
             onDelete={handleDeleteProduct}
+            onPreview={handlePreview}
           />
         ))}
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal isOpen={isFormModalOpen} onClose={() => setIsFormModalOpen(false)}>
         <ProductForm
           product={editingProduct}
           onSave={handleSave}
-          onCancel={() => setIsModalOpen(false)}
+          onCancel={() => setIsFormModalOpen(false)}
         />
       </Modal>
+
+      <ProductPreview
+        product={previewProduct}
+        isOpen={isPreviewModalOpen}
+        onClose={() => setIsPreviewModalOpen(false)}
+      />
     </div>
   );
 };
