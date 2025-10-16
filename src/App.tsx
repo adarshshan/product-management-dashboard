@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
 import "./styles/tailwind.css";
+import "./App.css";
 
 const App: React.FC = () => {
   return (
