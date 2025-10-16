@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Product Management Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple, single-page web application for managing products, built with React, TypeScript, and Tailwind CSS. It uses the [Fake Store API](https://fakestoreapi.com/) for backend data.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **View Products**: Fetches and displays a list of products in a responsive card layout.
+- **Add, Edit, Delete**: Perform CRUD operations on products.
+  - **Add**: A form to add a new product (mocked API call).
+  - **Edit**: A form to edit an existing product (mocked API call).
+  - **Delete**: Remove a product from the list (mocked API call).
+- **Preview**: View a product's full details in a modal.
+- **Search**: Filter products by title in real-time.
+- **Filter by Category**: Filter products based on their category.
+- **Loading & Error States**: Displays loading spinners and error messages for API interactions.
+- **TypeScript**: Fully typed codebase for better maintainability.
+- **Dockerized**: Includes a `Dockerfile` for easy containerization and deployment.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: [React](https://reactjs.org/) (v18) with functional components and hooks.
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **API Client**: [Axios](https://axios-http.com/)
+- **API**: [Fake Store API](https://fakestoreapi.com/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- [Node.js](https://nodejs.org/en/) (v14 or later)
+- [npm](https://www.npmjs.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd product-dashboard
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Running the Application
 
-### `npm run eject`
+To start the development server, run:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```sh
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Docker
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This project can be built and run as a Docker container.
 
-## Learn More
+### Build the Docker Image
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+From the project root directory, run:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+docker build -t product-dashboard .
+```
 
-### Code Splitting
+### Run the Docker Container
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To run the image you just built, use the following command:
 
-### Analyzing the Bundle Size
+```sh
+docker run -p 8080:80 product-dashboard
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The application will be accessible at [http://localhost:8080](http://localhost:8080).
